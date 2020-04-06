@@ -9,7 +9,7 @@ from keras.layers import MaxPooling1D, GlobalMaxPooling1D
 from keras.models import Sequential
 from keras.layers import Embedding
 from keras.preprocessing import sequence
-import deeptax.models.batchgenerator as bg
+import deeptax.deeptax.models.batchgenerator as bg
 
 
 """
@@ -20,10 +20,10 @@ Date: 26.06.2019 1D CNN for sequence classification
 
 def runtraining():
     print('loading data...')
-    info = pickle.load(open("/srv/deeptax/data/info.pkl", 'rb'))
-    fname_train = '/srv/deeptax/data/train.txt'
-    fname_val = '/srv/deeptax/data/val_train.txt'
-    fname_test = '/srv/deeptax/data/test.txt'
+    info = pickle.load(open("/srv/deeptax/deeptax/data/info.pkl", 'rb'))
+    fname_train = '/srv/deeptax/deeptax/data/train.txt'
+    fname_val = '/srv/deeptax/deeptax/data/val_train.txt'
+    fname_test = '/srv/deeptax/deeptax/data/test.txt'
     print('defining model:')
 
     ly = 128  # layer
@@ -80,8 +80,8 @@ def runtraining():
 
     print('training the model... done!!!')
     print('savinig the history...')
-    pickle.dump(network, open("/srv/deeptax/data/history.pkl", 'wb'), protocol=4)
-    pickle.dump(results_eval, open("/srv/deeptax/data/results_eval.pkl", 'wb'), protocol=4)
+    pickle.dump(network, open("/srv/deeptax/deeptax/data/history.pkl", 'wb'), protocol=4)
+    pickle.dump(results_eval, open("/srv/deeptax/deeptax/data/results_eval.pkl", 'wb'), protocol=4)
     print('done...')
 
 """
