@@ -9,7 +9,7 @@ import pkg_resources
 # import project's config.py
 import deeptax.config as cfg
 from aiohttp.web import HTTPBadRequest
-import deeptax.models.train_model_1D as dptax1D
+import deeptax.deeptax.models.train_model_1D as dptax1D
 
 ## Authorization
 from flaat import Flaat
