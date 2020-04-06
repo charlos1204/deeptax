@@ -10,3 +10,12 @@ marshmallow
 
 deepaas>=1.0.0
 flaat>=0.5.1
+
+#deeptax libs
+numpy
+keras
+pandas
+matplotlib
+sklearn
+flask
+six

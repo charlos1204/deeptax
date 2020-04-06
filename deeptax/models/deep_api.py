@@ -9,6 +9,7 @@ import pkg_resources
 # import project's config.py
 import deeptax.config as cfg
 from aiohttp.web import HTTPBadRequest
+import deeptax.models.train_model_1D as dptax1D
 
 ## Authorization
 from flaat import Flaat
@@ -184,20 +185,26 @@ def train(**kwargs):
     :param kwargs:
     :return:
     """
+    data_origin = 'rshare:/traning_data'
+    data_copy = os.path.join(cfg.BASE_DIR,
+                             'data')
+    command = (['rclone', 'copy', data_origin, data_copy])
+
+	dptax1D.runtraining()
 
     message = { "status": "ok",
                 "training": [],
               }
 
     # use the schema
-    schema = cfg.TrainArgsSchema()
+    # schema = cfg.TrainArgsSchema()
     # deserialize key-word arguments
-    train_args = schema.load(kwargs)
+    # train_args = schema.load(kwargs)
     
     # 1. implement your training here
     # 2. update "message"
     
-    train_results = { "Error": "No model implemented for training (train())" }
+    train_results = { "Status": "Training finished" }
     message["training"].append(train_results)
 
     return message
