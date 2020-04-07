@@ -9,7 +9,10 @@ import pkg_resources
 # import project's config.py
 import deeptax.config as cfg
 from aiohttp.web import HTTPBadRequest
-import deeptax.deeptax.models.train_model_1D as dptax1D
+import deeptax.models.train_model_1D as dptax1D
+import os
+import subprocess
+import time
 
 ## Authorization
 from flaat import Flaat
@@ -189,8 +192,11 @@ def train(**kwargs):
     data_copy = os.path.join(cfg.BASE_DIR,
                              'data')
     command = (['rclone', 'copy', data_origin, data_copy])
+    result = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output, error = result.communicate()
+    print(error)
 
-	dptax1D.runtraining()
+    dptax1D.runtraining()
 
     message = { "status": "ok",
                 "training": [],
@@ -203,6 +209,15 @@ def train(**kwargs):
     
     # 1. implement your training here
     # 2. update "message"
+    
+    time.sleep(60)
+    print("uploading results to Nexcloud")
+    data_origin = os.path.join(cfg.BASE_DIR,
+                               'models')
+    data_copy = 'rshare:/model_trained/'
+    command = (['rclone', 'copy', data_origin, data_copy])
+    result = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output, error = result.communicate()
     
     train_results = { "Status": "Training finished" }
     message["training"].append(train_results)
@@ -279,3 +294,4 @@ if __name__ == '__main__':
     args = cmd_parser.parse_args()
     
     main()
+

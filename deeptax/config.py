@@ -63,8 +63,9 @@ class TrainArgsSchema(Schema):
 
     # available fields are e.g. fields.Integer(), fields.Str(), fields.Boolean()
     # full list of fields: https://marshmallow.readthedocs.io/en/stable/api_reference.html
-    arg1 = fields.Integer(
-        required=False,
-        missing=1,
-        description="Input argument 1 for training"
-    )
+    #arg1 = fields.Integer(
+    #    required=False,
+    #    missing=1,
+    #    description="Input argument 1 for training"
+    #)
+
